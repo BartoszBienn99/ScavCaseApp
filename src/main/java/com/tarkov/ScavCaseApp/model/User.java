@@ -18,16 +18,26 @@ public class User implements UserDetails {
     private String password;
     private String email;
 
-    @ManyToOne
-    private Role role;
-
-    public User(int id, String login, String password, String email, Role role) {
-        this.id = id;
+    public User(String login, String password, String email, Collection<Role> roles) {
         this.login = login;
         this.password = password;
         this.email = email;
-        this.role = role;
+        this.roles = roles;
     }
+
+    public User() {
+    }
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(
+                    name = "user_id",
+                    referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id",
+                    referencedColumnName = "id"))
+    private Collection<Role> roles;
 
     public int getId() {
         return id;
@@ -45,13 +55,33 @@ public class User implements UserDetails {
         this.login = login;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     @Override
@@ -79,25 +109,6 @@ public class User implements UserDetails {
         return false;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
 
 
     @Override

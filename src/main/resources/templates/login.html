@@ -1,9 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>ScavCaseApp</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
 </head>
 <body>
+<div class="mx-auto" style="width: 1200px" align="center">
+    <h1>ScavCaseApp</h1>
+    <div th:if="${param.error}">
+        <div class="alert alert-danger">
+            ❌ Nieprawidłowa nazwa użytkownika lub hasło!
+        </div>
+    </div>
+    <div class="alert alert-success" role="alert" th:text="${success}" th:if="${success}"></div>
+    <hr>
+    <form th:action="@{/login}" method="post">
+        <div class = "form-group">
+            <label for = "username"> Login: </label>
+            <input type="text" class="form-control mb-4 col-4" id="username" name="username" placeholder="Wprowadź swój login" autofocus="autofocus">
+        </div>
+        <div class = "form-group">
+            <label for="password"> Hasło: </label>
+            <input type="password" class="form-control mb-4 col-4" id="password" name="password" placeholder="Wprowadź swoje hasło">
+        </div>
+        <input type="checkbox" class="form-check-input" onclick="showPassword()">Pokaż hasło
+        <br><br>
+        <button type="submit" class="btn btn-dark col-2">Zaloguj</button>
+    </form>
+    <hr>
+    <div>
+        Jesteś tu pierwszy raz? Zarejestruj się <a href="/" th:href="@{/register}">tutaj!</a>
+    </div>
+</div>
+<script>
+function showPassword() {
+  var x = document.getElementById("password");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+</script>
 </body>
 </html>
