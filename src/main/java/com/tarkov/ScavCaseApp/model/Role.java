@@ -1,6 +1,6 @@
 package com.tarkov.ScavCaseApp.model;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 
 @Entity
