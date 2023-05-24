@@ -14,6 +14,8 @@ public class Raid {
     private User user;
 
     private float costOfSendingScavs;
+
+    private String typeOfGivenItem;
     private float valueOfReceivedItems;
     private boolean isCompleted;
 
@@ -25,13 +27,13 @@ public class Raid {
     )
     Set<Item> items = new HashSet<>();
 
-    public Raid(int id, User user, float costOfSendingScavs, float valueOfReceivedItems, boolean isCompleted, Set<Item> items) {
-        this.id = id;
+    public Raid(User user, float costOfSendingScavs, String typeOfGivenItem, float valueOfReceivedItems, boolean isCompleted) {
         this.user = user;
         this.costOfSendingScavs = costOfSendingScavs;
+        this.typeOfGivenItem = typeOfGivenItem;
         this.valueOfReceivedItems = valueOfReceivedItems;
         this.isCompleted = isCompleted;
-        this.items = items;
+
     }
 
     public int getId() {
@@ -56,6 +58,14 @@ public class Raid {
 
     public void setCostOfSendingScavs(float costOfSendingScavs) {
         this.costOfSendingScavs = costOfSendingScavs;
+    }
+
+    public String getTypeOfGivenItem() {
+        return typeOfGivenItem;
+    }
+
+    public void setTypeOfGivenItem(String typeOfGivenItem) {
+        this.typeOfGivenItem = typeOfGivenItem;
     }
 
     public float getValueOfReceivedItems() {
@@ -88,6 +98,7 @@ public class Raid {
                 "id=" + id +
                 ", user=" + user +
                 ", costOfSendingScavs=" + costOfSendingScavs +
+                ", typeOfGivenItem='" + typeOfGivenItem + '\'' +
                 ", valueOfReceivedItems=" + valueOfReceivedItems +
                 ", isCompleted=" + isCompleted +
                 ", items=" + items +

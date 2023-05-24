@@ -10,15 +10,26 @@
           crossorigin="anonymous">
 </head>
 <body>
-<div class="mx-auto" style="width: 1200px" align="center">
-    <h1>ScavCaseApp</h1>
+<div class ="mx-auto"  align="center">
+    <nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
+        <a class="navbar-brand" href="#" th:href="@{/login}">ScavCaseApp</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+            </ul>
+        </div>
+    </nav>
     <div th:if="${param.error}">
         <div class="alert alert-danger">
             ❌ Nieprawidłowa nazwa użytkownika lub hasło!
         </div>
     </div>
-    <div class="alert alert-success" role="alert" th:text="${success}" th:if="${success}"></div>
+    <br><br>
+    <h1>Zaloguj się</h1>
     <hr>
+    <div class="alert alert-success" role="alert" th:text="${success}" th:if="${success}"></div>
     <form th:action="@{/login}" method="post">
         <div class = "form-group">
             <label for = "username"> Login: </label>

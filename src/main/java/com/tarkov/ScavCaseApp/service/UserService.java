@@ -10,6 +10,10 @@ public interface UserService extends UserDetailsService {
     List<User> getAllUsers();
     void addUser(User user);
 
+    Integer getLoggedUserId();
+
+    User getUserById(int id);
+
     User save(UserRegistrationDto userRegistrationDto);
 
 }

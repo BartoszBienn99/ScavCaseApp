@@ -5,8 +5,10 @@ import com.tarkov.ScavCaseApp.model.Role;
 import com.tarkov.ScavCaseApp.model.User;
 import com.tarkov.ScavCaseApp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,6 +40,26 @@ public class UserServiceImpl implements UserService{
     public void addUser(User user) {
         this.userRepository.save(user);
 
+    }
+
+    @Override
+    public Integer getLoggedUserId() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String loggedUserLogin = authentication.getName();
+        User loggedUser = userRepository.findByLogin(loggedUserLogin);
+        return loggedUser.getId();
+    }
+
+    @Override
+    public User getUserById(int id) {
+        Optional<User> optional = userRepository.findById(id);
+        User user = null;
+        if(optional.isPresent()){
+            user = optional.get();
+        } else {
+            throw new RuntimeException("Nie znaleziono użytkownika o id: " + id);
+        }
+        return user;
     }
 
     @Override
