@@ -1,6 +1,7 @@
 package com.tarkov.ScavCaseApp.controller;
 
 import com.tarkov.ScavCaseApp.dto.AddRaidDto;
+import com.tarkov.ScavCaseApp.model.Raid;
 import com.tarkov.ScavCaseApp.service.RaidService;
 import com.tarkov.ScavCaseApp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/raids")
@@ -22,7 +25,9 @@ public class RaidController {
     private UserService userService;
 
     @GetMapping
-    public String getRaidView() {
+    public String getRaidView(Model model) {
+        List<Raid> loggedUserRaids = raidService.getRaidsByUserId(userService.getLoggedUserId());
+        model.addAttribute("userRaidsList", loggedUserRaids);
         return "raids";
     }
 

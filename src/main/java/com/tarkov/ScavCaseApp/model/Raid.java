@@ -36,6 +36,9 @@ public class Raid {
 
     }
 
+    public Raid() {
+    }
+
     public int getId() {
         return id;
     }

@@ -29,10 +29,46 @@
             </ul>
         </div>
     </nav>
+    <hr>
+    <br><br>
     <div>
         <a th:href="@{raids/addRaid}" class="btn btn-outline-info">Dodaj nowy raid</a>
     </div>
+    <br><br>
+    <hr>
+    <table border="1" class="table table-resposive-md table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th> ID </th>
+            <th> KOSZT WYSŁANIA SCAVÓW </th>
+            <th> TYP DANEGO PRZEDMIOTU </th>
+            <th> WARTOŚĆ ZDOBYTYCH PRZEDMIOTÓW </th>
+            <th> ZAKOŃCZONY? </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${userRaidsList.empty}">
+            <td colspan="2"> Nie znaleziono raidów </td>
+        </tr>
+        <tr th:each="userRaid : ${userRaidsList}" style="cursor: pointer"
+            th:raidId="${userRaid.id}" th:onclick="rowClicked(this.getAttribute('raidId'))">
+            <td><span th:text="${userRaid.id}">  </span></td>
+            <td><span th:text="${userRaid.costOfSendingScavs}">  </span></td>
+            <td><span th:text="${userRaid.typeOfGivenItem}">  </span></td>
+            <td><span th:text="${userRaid.valueOfReceivedItems}">  </span></td>
+            <td><span th:text="${userRaid.isCompleted}">  </span></td>
 
+        </tr>
+        </tbody>
+    </table>
 </div>
+<script>
+    function rowClicked(value) {
+        window.location.replace("/raids?id=" + value);
+    }
+</script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"</script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"</script>
 </body>
 </html>
