@@ -7,10 +7,7 @@ import com.tarkov.ScavCaseApp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -46,4 +43,17 @@ public class RaidController {
         return "redirect:/";
     }
 
+    @GetMapping("/{id}")
+    public String showSelectedRaid(@PathVariable(value = "id")int raidId, Model model) {
+        Raid raid = raidService.getRaidById(raidId);
+        model.addAttribute("raid", raid);
+        return "update_raid";
+    }
+
+    @PostMapping("/updateRaid")
+    public String updateRaid(@ModelAttribute("raid") Raid raid) {
+        raid.setUser(userService.getUserById(userService.getLoggedUserId()));
+        raidService.addRaid(raid);
+        return "redirect:/";
+    }
 }

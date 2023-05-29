@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RaidServiceImpl implements RaidService {
@@ -35,4 +36,17 @@ public class RaidServiceImpl implements RaidService {
     public List<Raid> getRaidsByUserId(int id) {
         return raidRepository.findByUserId(id);
     }
+
+    @Override
+    public Raid getRaidById(int id) {
+        Optional<Raid> optional = raidRepository.findById(id);
+        Raid raid = null;
+        if(optional.isPresent()){
+            raid = optional.get();
+        } else {
+            throw new RuntimeException("Nie znaleziono raidu o id: " + id);
+        }
+        return raid;
+    }
+
 }

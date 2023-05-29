@@ -13,4 +13,7 @@ public interface RaidService {
     void saveRaid(AddRaidDto addRaidDto);
 
     List<Raid> getRaidsByUserId(int id);
+
+    Raid getRaidById(int id);
+
 }

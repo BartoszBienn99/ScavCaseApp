@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>ScavCaseApp</title>
+  <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+</head>
+<body>
+<div class="mx-auto" align="center">
+  <nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
+    <a class="navbar-brand" href="#" th:href="@{/raids}">ScavCaseApp</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+      </ul>
+    </div>
+  </nav>
+  <br><br>
+  <h1>Zmień status raidu</h1>
+  <div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+  <hr>
+  <form action="#" th:action="@{/raids/updateRaid}" th:object = "${raid}" method="POST">
+    <input type="hidden" th:field = "*{id}" class="form-control mb-4 col-4">
+    <label>Koszt wysłania scavów</label>
+    <input type="text" th:field = "*{costOfSendingScavs}"class="form-control mb-4 col-4" readonly>
+    <label>Typ danego przedmiotu</label>
+    <input type="text" th:field = "*{typeOfGivenItem}"class="form-control mb-4 col-4" readonly>
+    <label>Wartość zdobytych przedmiotów</label>
+    <input type="text" th:field = "*{valueOfReceivedItems}"class="form-control mb-4 col-4" readonly>
+    <label>Zakończony?</label>
+    <input type="checkbox" th:checked= "*{isCompleted}"class="form-control mb-4 col-4" th:field ="*{isCompleted}">
+    <br><br>
+    <button type="submit" class="btn btn-dark col-2">Zaktualizuj raid!</button>
+  </form>
+  <hr>
+</div>
+</body>
+</html>
