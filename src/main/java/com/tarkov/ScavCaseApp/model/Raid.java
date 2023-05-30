@@ -2,6 +2,7 @@ package com.tarkov.ScavCaseApp.model;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 @Entity
 @Table(name = "raids")
@@ -19,13 +20,8 @@ public class Raid {
     private float valueOfReceivedItems;
     private boolean isCompleted;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(
-            name = "raid_items",
-            joinColumns = { @JoinColumn(name = "raid_id")},
-            inverseJoinColumns = { @JoinColumn(name = "item_id")}
-    )
-    Set<Item> items = new HashSet<>();
+    @OneToMany(mappedBy = "raid")
+    private List<RaidItems> raidItems;
 
     public Raid(User user, float costOfSendingScavs, String typeOfGivenItem, float valueOfReceivedItems, boolean isCompleted) {
         this.user = user;
@@ -87,12 +83,12 @@ public class Raid {
         isCompleted = completed;
     }
 
-    public Set<Item> getItems() {
-        return items;
+    public List<RaidItems> getRaidItems() {
+        return raidItems;
     }
 
-    public void setItems(Set<Item> items) {
-        this.items = items;
+    public void setRaidItems(List<RaidItems> raidItems) {
+        this.raidItems = raidItems;
     }
 
     @Override
@@ -104,7 +100,7 @@ public class Raid {
                 ", typeOfGivenItem='" + typeOfGivenItem + '\'' +
                 ", valueOfReceivedItems=" + valueOfReceivedItems +
                 ", isCompleted=" + isCompleted +
-                ", items=" + items +
+                ", items=" + raidItems +
                 '}';
     }
 }

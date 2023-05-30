@@ -3,9 +3,8 @@ package com.tarkov.ScavCaseApp.model;
 
 
 import javax.persistence.*;
+import java.util.List;
 
-import java.util.HashSet;
-import java.util.Set;
 @Entity
 @Table(name = "items")
 public class Item {
@@ -17,15 +16,18 @@ public class Item {
     private String shortName;
     private String imageUrl;
 
-    @ManyToMany(mappedBy = "items")
-    Set<Raid> raids = new HashSet<>();
+    @OneToMany(mappedBy = "item")
+    List<RaidItems> raidItems;
 
-    public Item(int id, String fullName, String shortName, String imageUrl, Set<Raid> raids) {
+    public Item(int id, String fullName, String shortName, String imageUrl) {
         this.id = id;
         this.fullName = fullName;
         this.shortName = shortName;
         this.imageUrl = imageUrl;
-        this.raids = raids;
+
+    }
+
+    public Item() {
     }
 
     public int getId() {
@@ -60,12 +62,12 @@ public class Item {
         this.imageUrl = imageUrl;
     }
 
-    public Set<Raid> getRaids() {
-        return raids;
+    public List<RaidItems> getRaidItems() {
+        return raidItems;
     }
 
-    public void setRaids(Set<Raid> raids) {
-        this.raids = raids;
+    public void setRaidItems(List<RaidItems> raidItems) {
+        this.raidItems = raidItems;
     }
 
     @Override
@@ -75,7 +77,7 @@ public class Item {
                 ", fullName='" + fullName + '\'' +
                 ", shortName='" + shortName + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
-                ", raids=" + raids +
+                ", raids=" + raidItems +
                 '}';
     }
 }

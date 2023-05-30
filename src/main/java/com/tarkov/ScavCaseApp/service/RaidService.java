@@ -2,7 +2,7 @@ package com.tarkov.ScavCaseApp.service;
 
 import com.tarkov.ScavCaseApp.dto.AddRaidDto;
 import com.tarkov.ScavCaseApp.model.Raid;
-import com.tarkov.ScavCaseApp.model.User;
+
 
 import java.util.List;
 

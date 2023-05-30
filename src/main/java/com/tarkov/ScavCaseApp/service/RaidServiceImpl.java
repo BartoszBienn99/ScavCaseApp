@@ -2,7 +2,6 @@ package com.tarkov.ScavCaseApp.service;
 
 import com.tarkov.ScavCaseApp.dto.AddRaidDto;
 import com.tarkov.ScavCaseApp.model.Raid;
-import com.tarkov.ScavCaseApp.model.User;
 import com.tarkov.ScavCaseApp.repository.RaidRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

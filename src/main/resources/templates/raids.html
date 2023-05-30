@@ -36,7 +36,10 @@
     </div>
     <br><br>
     <hr>
-    <table border="1" class="table table-resposive-md table-hover">
+    <tr th:if="${userRaidsList.empty}">
+        <td colspan="2"> Nie znaleziono raidów </td>
+    </tr>
+    <table border="1" class="table table-resposive-md table-hover mb-4 col-10">
         <thead class="thead-dark">
         <tr>
             <th> ID </th>
@@ -47,9 +50,6 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:if="${userRaidsList.empty}">
-            <td colspan="2"> Nie znaleziono raidów </td>
-        </tr>
         <tr th:each="userRaid : ${userRaidsList}" style="cursor: pointer"
             th:raidId="${userRaid.id}" th:onclick="rowClicked(this.getAttribute('raidId'))">
             <td><span th:text="${userRaid.id}">  </span></td>
