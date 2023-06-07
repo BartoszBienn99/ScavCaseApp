@@ -14,16 +14,16 @@ public class Raid {
     @ManyToOne
     private User user;
 
-    private float costOfSendingScavs;
+    private int costOfSendingScavs;
 
     private String typeOfGivenItem;
-    private float valueOfReceivedItems;
+    private int valueOfReceivedItems;
     private boolean isCompleted;
 
     @OneToMany(mappedBy = "raid")
     private List<RaidItems> raidItems;
 
-    public Raid(User user, float costOfSendingScavs, String typeOfGivenItem, float valueOfReceivedItems, boolean isCompleted) {
+    public Raid(User user, int costOfSendingScavs, String typeOfGivenItem, int valueOfReceivedItems, boolean isCompleted) {
         this.user = user;
         this.costOfSendingScavs = costOfSendingScavs;
         this.typeOfGivenItem = typeOfGivenItem;
@@ -51,11 +51,11 @@ public class Raid {
         this.user = user;
     }
 
-    public float getCostOfSendingScavs() {
+    public int getCostOfSendingScavs() {
         return costOfSendingScavs;
     }
 
-    public void setCostOfSendingScavs(float costOfSendingScavs) {
+    public void setCostOfSendingScavs(int costOfSendingScavs) {
         this.costOfSendingScavs = costOfSendingScavs;
     }
 
@@ -67,11 +67,11 @@ public class Raid {
         this.typeOfGivenItem = typeOfGivenItem;
     }
 
-    public float getValueOfReceivedItems() {
+    public int getValueOfReceivedItems() {
         return valueOfReceivedItems;
     }
 
-    public void setValueOfReceivedItems(float valueOfReceivedItems) {
+    public void setValueOfReceivedItems(int valueOfReceivedItems) {
         this.valueOfReceivedItems = valueOfReceivedItems;
     }
 

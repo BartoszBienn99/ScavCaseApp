@@ -4,13 +4,13 @@ import com.tarkov.ScavCaseApp.model.User;
 
 public class AddRaidDto {
 
-    private float costOfSendingScavs;
+    private int costOfSendingScavs;
 
     private String typeOfGivenItem;
-    private float valueOfReceivedItems;
+    private int valueOfReceivedItems;
     private User user;
 
-    public AddRaidDto(float costOfSendingScavs, String typeOfGivenItem, float valueOfReceivedItems, User user) {
+    public AddRaidDto(int costOfSendingScavs, String typeOfGivenItem, int valueOfReceivedItems, User user) {
         this.costOfSendingScavs = costOfSendingScavs;
         this.typeOfGivenItem = typeOfGivenItem;
         this.user = user;
@@ -19,11 +19,11 @@ public class AddRaidDto {
     public AddRaidDto() {
     }
 
-    public float getCostOfSendingScavs() {
+    public int getCostOfSendingScavs() {
         return costOfSendingScavs;
     }
 
-    public void setCostOfSendingScavs(float costOfSendingScavs) {
+    public void setCostOfSendingScavs(int costOfSendingScavs) {
         this.costOfSendingScavs = costOfSendingScavs;
     }
 

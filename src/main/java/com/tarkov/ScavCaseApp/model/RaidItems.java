@@ -4,18 +4,22 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "raid_items")
-@IdClass(RaidItemsId.class)
 public class RaidItems {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+
     @ManyToOne
     @JoinColumn(name = "raid_id", referencedColumnName = "id")
     private Raid raid;
 
-    @Id
+
     @ManyToOne
     @JoinColumn(name = "item_id", referencedColumnName = "id")
     private Item item;
+
 
     @Column(name = "item_value")
     private int itemValue;

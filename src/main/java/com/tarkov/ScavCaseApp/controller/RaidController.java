@@ -51,6 +51,11 @@ public class RaidController {
     public String saveRaid(@ModelAttribute("addRaidDto") AddRaidDto addRaidDto) {
         int loggedUserId = userService.getLoggedUserId();
         addRaidDto.setUser(userService.getUserById(loggedUserId));
+        if(addRaidDto.getTypeOfGivenItem().equals("95000₽") || addRaidDto.getTypeOfGivenItem().equals("15000₽") || addRaidDto.getTypeOfGivenItem().equals("2500₽")){
+            String valueStr = addRaidDto.getTypeOfGivenItem();
+            int value = Integer.parseInt(valueStr.substring(0, valueStr.length() - 1));
+            addRaidDto.setCostOfSendingScavs(value);
+        }
         raidService.saveRaid(addRaidDto);
         return "redirect:/";
     }
@@ -81,6 +86,7 @@ public class RaidController {
         Raid raid = raidService.getRaidById(addItemDto.getRaidId());
         Item item = itemService.getItemById(addItemDto.getItemId());
         RaidItems raidItems = new RaidItems(raid, item, addItemDto.getItemValue());
+        raid.setValueOfReceivedItems(raid.getValueOfReceivedItems()+ addItemDto.getItemValue());
         raidItemsService.addRaidItems(raidItems);
         return "redirect:/raids/" + addItemDto.getRaidId();
     }
